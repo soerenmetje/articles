@@ -2,12 +2,11 @@
 
 # Debug Kubernetes Applications - A Swiss Army Knife Pod
 
-To debug Kubernetes applications, f.e. the network access of pods, an interactive container shell including all essential tools is great - a Swiss army knife so to speak. 
-This is an approach based on the extended Ubuntu image [leodotcloud/swiss-army-knife](https://hub.docker.com/r/leodotcloud/swiss-army-knife) created by [leodotcloud](https://github.com/leodotcloud).
+To debug Kubernetes applications, f.e. the network access of pods, an interactive container shell including all essential tools is great - a Swiss army knife so to speak. This is an approach based on the extended Ubuntu image [leodotcloud/swiss-army-knife](https://hub.docker.com/r/leodotcloud/swiss-army-knife) created by [leodotcloud](https://github.com/leodotcloud).
 
 ## Usage 
 ### Create Debugging-Pod
-Spin up a the pod:
+Spin up the pod:
 
 ``` shell
 kubectl create -n mynamespace -f - <<EOF
@@ -51,8 +50,7 @@ kubectl delete pod -n mynamespace swiss-army-knife
 
 ## Tools and Packages
 
-Following tools and packages are included.
-An up-to-date list is available in the [Dockerfile](https://github.com/leodotcloud/swiss-army-knife/blob/main/package/Dockerfile).
+Following tools and packages are included. An up-to-date list is available in the [Dockerfile](https://github.com/leodotcloud/swiss-army-knife/blob/main/package/Dockerfile).
 
 - arping
 - arptables
