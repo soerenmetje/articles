@@ -54,6 +54,10 @@ console.log(subscriptions) // 0 subscriptions
 To prevent injections, we need to escape the user input before using it in a Stripe search query. What exactly has to be considered tells us the [Stripe query language documentation](https://stripe.com/docs/search#search-query-language). Let's hope it is complete.
 Based on that, it comes down to string replacement of single quotes `'`, double quotes `"`, and backslashes `\`, so an attacker can not end the value part and add additional query clauses.
 
+## Final Thoughts
+
+Is this a good solution? No. As an external developer, I can only implement what is documented by Stripe. There might exist undocumented behavior that could lead to new vulnerabilities. The best approach would be for Stripe to provide this functionality since they know all the implementation details of their search queries. Until then, this is the best we can achieve.
+
 ## References
 - https://stripe.com/docs/search
 - https://stripe.com/docs/api/subscriptions/search
