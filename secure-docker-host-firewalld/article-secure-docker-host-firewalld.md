@@ -5,12 +5,12 @@
 
 If you are using a firewall like ufw or firewalld and docker you may encounter the problem that docker bypasses the firewall rules.
 
-### Goal
-The firewall rules should count for whole host system - so including docker containers with port mappings. 
-The host ports in container port mappings can be allowed in firewall and therefore be exposed to the internet.
-Also, the approach should not break container networking.
+## Goal
+- The firewall rules should count for whole host system - so including Docker containers with port mappings
+- A Docker container should be accessible from the internet if and only if the host port used in Docker container port mapping is allowed in the firewall
+- The approach should not break container networking
 
-### Existing Approaches 
+## Existing Approaches 
 I found following approaches that try to fix the problem. However, each approach introduced another problem:
 
 - Just do not use docker. Podman for example obeys firewall rules by default. Problem: Some can not or may not want to switch to a different container runtime, but I generally recommend checking if this is an option for you. [This article](https://phoenixnap.com/kb/podman-vs-docker) includes a comparison. 
