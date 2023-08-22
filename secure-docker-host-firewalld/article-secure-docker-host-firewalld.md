@@ -215,7 +215,7 @@ docker run --rm curlimages/curl -v http://172.17.0.1:80/
 ## Further Reading
 
 - Good firewalld guide: https://docs.rockylinux.org/guides/security/firewalld-beginners/
-
+- Great article for understanding container networking (and also the steps of this article): https://iximiuz.com/en/posts/container-networking-is-simple/
 
 ## Sources
 - https://erfansahaf.medium.com/why-docker-and-firewall-dont-get-along-with-each-other-ddca7a002e10
