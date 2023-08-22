@@ -2,7 +2,7 @@
 
 # Debug Kubernetes Applications - A Swiss Army Knife Pod
 
-To debug Kubernetes applications, f.e. the network access of pods, an interactive container shell including all essential tools is great - a Swiss army knife so to speak. This is an approach based on the extended Ubuntu image [leodotcloud/swiss-army-knife](https://hub.docker.com/r/leodotcloud/swiss-army-knife) created by [leodotcloud](https://github.com/leodotcloud).
+To debug Kubernetes applications, e.g. if pods can reach a service, an interactive container shell including all essential tools is great - a Swiss army knife so to speak. Unfortunately, in popular base images such as Ubuntu, Debian, CentOS, and Busybox essential debugging tools are not included due to image size reduction and security. While this is great in production environments, it is counterproductive for debugging. Here, we presented an approach based on the extended Ubuntu image [leodotcloud/swiss-army-knife](https://hub.docker.com/r/leodotcloud/swiss-army-knife) created by [leodotcloud](https://github.com/leodotcloud).
 
 ## Usage 
 ### Create Debugging-Pod
