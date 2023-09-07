@@ -1,6 +1,6 @@
 ![A light watercolor painting of injecting into a search box](images/DALL%C2%B7E%202023-05-22%2014.41.14%20-%20Continue%20the%20background%20.png)
 
-#  Injections in Stripe Search Queries and How to Prevent Them
+# Stripe Search Query Injections and How to Prevent Them
 
 If you directly use user input in a [Stripe search query](https://stripe.com/docs/search), it is vulnerable to injections. Attackers can exploit this to gain read access to all records of your Stripe resource. The principle is basically the same as in SQL injections. In this article, I propose a fix.
 
@@ -10,7 +10,7 @@ If you directly use user input in a [Stripe search query](https://stripe.com/doc
 // NodeJS
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
-const userInput = "124' OR created>0 OR status:'active"
+const userInput = "124' OR created>0 OR status:'active" // Injection
 
 let subscriptions = await stripe.subscriptions.search({
     query: `metadata['myField']: '${userInput}'`
@@ -43,7 +43,7 @@ npm i stripe-escape-input
 const escapeInput = require("stripe-escape-input")
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
-const userInput = "124' OR created>0 OR status:'active"
+const userInput = "124' OR created>0 OR status:'active" // Injection
 
 let subscriptions = await stripe.subscriptions.search({
     query: `metadata['myField']: '${escapeInput(userInput)}'`
