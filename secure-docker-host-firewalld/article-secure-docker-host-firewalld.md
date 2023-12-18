@@ -22,6 +22,11 @@ I found following approaches that try to fix the problem. However, each approach
 ## Final Solution
 Idea: Disable iptables for docker and configure firewalld to allow container networking. It is based on this [Medium article](https://erfansahaf.medium.com/why-docker-and-firewall-dont-get-along-with-each-other-ddca7a002e10) by Erfan Sahafnejad and several posts. I tested it with Ubuntu 22.04.2 LTS but the concept should also work on other Linux.
 
+## Security Implications
+It is important to notice, that this approach can have security implications depending on the setup, e.g., as described [Keval Kapdee's post](https://www.reddit.com/r/selfhosted/comments/186bz2g/a_mailserver_incident_postmortem/). In his setup, he operated a mail server in a docker container with a similar configuration as discussed in this article. Due to the configured masquarading of packets, from the mailserver perspective, all packets originate from the IP address `172.22.1.1`, which is listed as a trusted address in Postfix by default. Therefore, Postfix relayed all requests from every internet IP address as these were seen as originating from a trusted address. In summary, this approach is not suited for use cases, which use original internet IP addresses, e.g., for access control. 
+
+Overall, especially in production setups, I recommend using other approaches such as Podman instead of the approach discussed in this article.
+
 ### Preparation
 
 If you added any configuration to iptables regarding docker before, remove it first.
@@ -177,8 +182,8 @@ firewall-cmd --permanent --zone=public --add-port=8080/tcp
 firewall-cmd --reload
 ```
 
-## Extra: Test Networking
-Run checks to ensure the firewall is working properly. Following things should hold true:
+## Extra: Testing
+It is important to run tests to ensure the whole setup is working properly. Although the actual tests depend on your setup, here are some statements that may be important to verify:
 
 - Container running on allowed port can be accessed from internet
 - Container running on **not** allowed port can **not** be accessed from internet
