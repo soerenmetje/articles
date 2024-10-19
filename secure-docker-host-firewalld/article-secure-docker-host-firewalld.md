@@ -19,13 +19,13 @@ I found following approaches that try to fix the problem. However, each approach
 - Disabling iptables for docker. Problem: Containers can not access internet.
 - Configuring the firewall to ignore port mappings. Problem: The port inside the container have to be allowed in the host firewall. If multiple containers use same port and only one should be allowed we have to additionally specify container IP or service name. In summary: Counterintuitive, complex and error-prone.
 
-## Final Solution
+## Approach
 Idea: Disable iptables for docker and configure firewalld to allow container networking. It is based on this [Medium article](https://erfansahaf.medium.com/why-docker-and-firewall-dont-get-along-with-each-other-ddca7a002e10) by Erfan Sahafnejad and several posts. I tested it with Ubuntu 22.04.2 LTS but the concept should also work on other Linux.
 
 ### Security Implications
 It is important to notice, that this approach can have security implications depending on the setup, e.g., as described [Keval Kapdee's post](https://www.reddit.com/r/selfhosted/comments/186bz2g/a_mailserver_incident_postmortem/). In his setup, he operated a mail server in a docker container with a similar configuration as discussed in this article. Due to the configured masquarading of packets, from the mailserver perspective, all packets originate from the IP address `172.22.1.1`, which is listed as a trusted address in Postfix by default. Therefore, Postfix relayed all requests from every internet IP address as these were seen as originating from a trusted address. In summary, this approach is not suited for use cases, which use original internet IP addresses, e.g., for access control. 
 
-Overall, especially in production setups, I recommend using other approaches such as Podman instead of the approach discussed in this article.
+Overall, especially in production setups, I recommend using **other approaches such as Podman** instead of the approach discussed in this article.
 
 ### Preparation
 
